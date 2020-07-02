@@ -1,0 +1,22 @@
+
+<div>
+<button (click)="toggleShowUp()">toogle msg</button>
+{{ msg }}
+</div>
+
+
+<div>
+  <button (click)="showEvent($event)">see event</button>
+  {{ eventMsg }}
+</div>
+
+<div>
+  <input (keyup)="onKey($event)">
+  {{ inputMsg }}
+</div>
+
+
+<div>
+  <input (keyup)="onKey2($event)">
+  {{ inputMsg2 }}
+</div>
