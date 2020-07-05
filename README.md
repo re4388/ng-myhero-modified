@@ -1,5 +1,18 @@
 # AngularTourOfHeroes
 
+
+
+
+## Personal note
+
+- 拿掉 ng-in-momory-db and use `json placeholder`
+- 新增 一些 nav bar 在 app comp, to practice
+
+
+
+----
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
 
 ## Development server

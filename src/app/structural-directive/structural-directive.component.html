@@ -1,0 +1,120 @@
+<h1>Structural Directive</h1>
+
+<p>the most common three `NgIf`, `NgFor` and `NgSwitch`</p>
+
+<h4>*ngIf</h4>
+<div *ngIf="fruit"> {{ fruit.name}} </div>
+
+<HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+<h4>ngif via ng-template</h4>
+<ng-template [ngIf]="fruit">
+  <div>{{ fruit.name }}</div>
+</ng-template>
+
+<HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+<h4>*ngFor</h4>
+<ol>
+  <li *ngFor="let fruit of fruits">
+  {{ fruit.name}}
+  </li>
+</ol>
+
+<HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+<h4>ngfor via ng-template</h4>
+<div *ngFor="let fruit of fruits;
+let i=index; let odd=odd; trackBy: trackById"
+[class.odd]="odd">
+  {{ i }} - {{fruit.name}}
+</div>
+
+<ng-template ngFor let-fruit [ngForOf]="fruits" let-i="index"
+let-odd="odd" [ngForTrackBy]="trackById">
+  <div [class.odd]="odd">
+    {{i}} - {{fruit.name}}
+  </div>
+</ng-template>
+
+<HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+<!-- ref: https://stackblitz.com/github/codecraft-tv/angular-course/tree/current/5.built-in-directives/3.ngif-and-ngswitch/code?file=src%2Fmain.ts -->
+<!-- https://angular.tw/guide/template-syntax#ngSwitch -->
+<h4>[ngSwitch] & *ngSwitchCase</h4>
+<ol
+*ngFor="let fruit of fruits"
+[ngSwitch]="fruit.name">
+  <li *ngSwitchCase="'pipeapple'" >
+  {{ fruit.name}}
+  </li>
+</ol>
+
+<HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+<h4>ng-template form of ngSwitch</h4>
+<ol
+*ngFor="let fruit of fruits"
+[ngSwitch]="fruit.name">
+  <ng-template [ngSwitchCase]="'pipeapple'">
+    {{ fruit.name}}
+  </ng-template>
+</ol>
+
+
+<br>
+<HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+<h4>display set to none to hide ele</h4>
+<p [style.display]="'block'">
+  Expression sets display to "block".
+  This paragraph is visible.
+</p>
+<p [style.display]="'none'">
+  Expression sets display to "none".
+  This paragraph is hidden but still in the DOM.
+</p>
+<br>
+
+<HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+<h4>ngIf is not hiding, it remove from dom and all of its listener</h4>
+<p *ngIf="true">
+  Expression is true and ngIf is true.
+  This paragraph is in the DOM.
+</p>
+<p *ngIf="false">
+  Expression is false and ngIf is false.
+  This paragraph is not in the DOM.
+
+<h5>
+use ngif if you want garbege collector take effect, and use display none when gc is not an issue and you want to display back very quick
+</h5>
+
+<HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+<h4>if no use of structural directive, only ng-template, ng just comment it</h4>
+<p>this is cuz ng will comment it before reder the view</p>
+<ng-template>
+  <p>You shall not see this sentence</p>
+</ng-template>
+
+
+<HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+<h4>Use ng-container</h4>
+<div>
+  Pick your favorite fruit
+  (<label><input type="checkbox"
+    checked (change)="notLow =! notLow">not low</label>)
+</div>
+<select [(ngModel)]="fruit">
+  <ng-container *ngFor="let fruit of fruits">
+    <ng-container *ngIf="notLow || fruit.stackLevel !== 'low'">
+      <option [ngValue]="fruit">{{fruit.name}} ({{fruit.stackLevel}})</option>
+    </ng-container>
+  </ng-container>
+</select>
+
+<br>
+<HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+<h4>Your First Structural Directive</h4>
+<p *appUnless="condition" class="unless a">
+  (A) This paragraph is displayed because the condition is false.
+</p>
+
+<p *appUnless="!condition" class="unless b">
+  (B) Although the condition is true,
+  this paragraph is displayed because appUnless is set to false.
+</p>

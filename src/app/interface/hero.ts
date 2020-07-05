@@ -3,8 +3,14 @@ interface Hero {
   name: string;
 }
 
+interface Fruit {
+  id: number;
+  name: string;
+  stackLevel: string;
+}
+
 interface IP {
   ip: string;
 }
 
-export { Hero, IP };
+export { Hero, IP, Fruit };
